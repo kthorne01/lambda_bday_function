@@ -1,5 +1,6 @@
 import requests
 import datetime
+import json
 
 TOKEN = "Bv9F1BLoHEqspVsoCJM7Y7zydz72y2tORFzzctOB"
 BOT_ID = "f2ed96df753c0b1dbaacce3511"
@@ -13,6 +14,7 @@ def send_message(msg):
     response = requests.post(url, json=data)
     print(response.content)
 
+
 def check_birthdays():
     # You can use a dictionary, database, or any other method to store birthdays
     birthdays = {
@@ -25,6 +27,15 @@ def check_birthdays():
     for name, bday in birthdays.items():
         if bday == today:
             send_message(f"Saints, please join me in wishing our {name} the Happiest of Birthdays on today!!!")
+
+
+def lambda_handler(event, context):
+    check_birthdays()
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Birthday check complete!')
+    }
+
 
 if __name__ == "__main__":
     check_birthdays()
