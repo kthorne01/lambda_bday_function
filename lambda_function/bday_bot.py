@@ -18,15 +18,28 @@ def send_message(msg):
 def check_birthdays():
     # You can use a dictionary, database, or any other method to store birthdays
     birthdays = {
-        "dear Sister Kayla": "09-01",
+        "dear Sister Kayla": "09-02",
+        "dear Sister Stephanie": "09-02",
+        "dear Brother Ted": "09-02",
         # Add more friends like: "Name": "MM-DD",
     }
 
     today = datetime.datetime.now().strftime("%m-%d")
 
-    for name, bday in birthdays.items():
-        if bday == today:
-            send_message(f"Saints, please join me in wishing our {name} the Happiest of Birthdays on today!!!")
+    birthday_people = [name for name, bday in birthdays.items() if bday == today]
+
+    if len(birthday_people) == 1:
+        send_message(f"Saints, please join me in wishing our {birthday_people[0]} the Happiest of Birthdays on today!!!")
+    elif len(birthday_people) == 2:
+        send_message(f"Saints, please join me in wishing the Happiest of Birthdays to our {birthday_people[0]} and our {birthday_people[1]}!!!")
+    elif len(birthday_people) > 2:
+        # Handle cases where there are more than 2 people with birthdays
+        names_except_last = ", ".join(birthday_people[:-1])
+        send_message(f"Saints, please join me in wishing the Happiest of Birthdays to our {names_except_last}, and {birthday_people[-1]}!!!")
+
+    # for name, bday in birthdays.items():
+    #     if bday == today:
+    #         send_message(f"Saints, please join me in wishing our {name} the Happiest of Birthdays on today!!!")
 
 
 def lambda_handler(event, context):
