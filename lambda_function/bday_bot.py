@@ -3,7 +3,8 @@ import datetime
 import json
 
 TOKEN = "Bv9F1BLoHEqspVsoCJM7Y7zydz72y2tORFzzctOB"
-BOT_ID = "f2ed96df753c0b1dbaacce3511"
+# BOT_ID = "f2ed96df753c0b1dbaacce3511" # test group bot ID
+BOT_ID = "e426f5452a51fde95288bb16bd" # ALC church group bot ID
 
 def send_message(msg):
     url = "https://api.groupme.com/v3/bots/post"
